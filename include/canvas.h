@@ -4,7 +4,9 @@
 typedef struct {
     int width;
     int height;
-    float *pixels; // Pointer to an array of pixel data (RGBA format)
+    float *pixels;
 } canvas_t;
+
+
 
 #endif
