@@ -7,6 +7,4 @@ typedef struct {
     float *pixels;
 } canvas_t;
 
-
-
 #endif
