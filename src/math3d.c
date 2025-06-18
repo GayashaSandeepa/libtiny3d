@@ -2,9 +2,9 @@
 #include <stdint.h>
 
 // Function Variables
-vec3_from_spherical(r, theta, phi);
-vec3_normalize_fast();
-vec3_slerp(a, b, t);
+int vec3_from_spherical(r, theta, phi);
+int vec3_normalize_fast();
+int vec3_slerp(a, b, t);
 
 vec3_from_spherical(float r, float theta, float phi) {
     vec3 v;
