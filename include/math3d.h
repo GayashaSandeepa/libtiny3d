@@ -7,16 +7,15 @@ typedef struct {
     float y;
     float z;
 
-    float r;
-    float theta;
-    float phi;
+    // float r;
+    // float theta;
+    // float phi;
 } vec3_t;
 
-void update_spherical_coordinates(vec3_t *v);
-void update_cartesian_coordinates(vec3_t *v);
 vec3_t vec3_from_spherical(float r, float theta, float phi);
 vec3_t vec3_normalize_fast(vec3_t v);
 vec3_t vec3_slerp(vec3_t a, vec3_t b, float t);
+void vec3_to_spherical(vec3_t v, float *r, float *theta, float *phi);
 
 
 typedef struct {
