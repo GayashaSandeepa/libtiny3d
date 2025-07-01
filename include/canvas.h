@@ -6,7 +6,7 @@
 typedef struct {
     int width;
     int height;
-    float *pixels; //2D array of pixel intensities
+    float **pixels; 
 } canvas_t;
 
 // Function prototypes
