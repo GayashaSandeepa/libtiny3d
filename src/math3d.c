@@ -1,20 +1,32 @@
 // importing libraries
+#include "math3d.h"
+#include <math.h>
 #include <stdint.h>
 
-// Function Variables
-int vec3_from_spherical(r, theta, phi);
-int vec3_normalize_fast();
-int vec3_slerp(a, b, t);
-
-vec3_from_spherical(float r, float theta, float phi) {
-    vec3 v;
+vec3_t vec3_from_spherical(float r, float theta, float phi) {
+    vec3_t v;
     v.x = r * sinf(phi) * cosf(theta);
     v.y = r * sinf(phi) * sinf(theta);
     v.z = r * cosf(phi);
     return v;
 }
 
-vec3_normalize_fast(vec3 v) {
+void vec3_to_spherical(vec3_t v, float *r, float *theta, float *phi) {
+    float length = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+    if (r) {
+        *r = length;
+    }
+
+    if (theta) {
+        *theta = atan2f(v.y, v.x);
+    }
+
+    if (phi) {
+        *phi = (length == 0.0f) ? 0.0f : acosf(v.z / length);
+    }
+}
+
+vec3_t vec3_normalize_fast(vec3_t v) {
     float squared_length = (v.x * v.x + v.y * v.y + v.z * v.z);
     int32_t i;
     float x2, y;
