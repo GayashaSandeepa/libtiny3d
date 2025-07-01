@@ -3,9 +3,7 @@
 #include <math.h>
 #include "canvas.h"
 
-// Function Variables
-set_pixel_f(canvas, x, y, intensity);
-draw_line_f(canvas, x0, y0, x1, y1, thickness);
+
 // Function Prototypes
 void set_pixel_f(canvas_t *canvas, float x, float y, float intensity);
 void draw_line_f(canvas_t *canvas, float x0, float y0, float x1, float y1, float thickness);
@@ -88,10 +86,13 @@ void draw_line_f(canvas_t *canvas,float x0,float y0,float x1,float y1,float thic
 //save a canvas to a PGM grayscale image file
 void save_canvas(canvas_t *canvas,const char *filename){
     FILE *file=fopen(filename,"w");
+    if (!fp) {perror ("fopen");
+             return;
+             }
     fprintf(file,"P2\n%d %d\n255\n",canvas->width,canvas->height);
     for (int y=0;y<canvas->height;y++){
         for (int x=0;x<canvas->width;x++){
-            int intensity=(int)(canvas->pixels[y][x]*255);
+            int intensity=(int)(canvas->pixels[y][x]*255.0f +0.5f);
             fprintf(file,"%d ",intensity);
         }
         fprintf(file,"\n");
