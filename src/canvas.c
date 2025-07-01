@@ -6,6 +6,9 @@
 // Function Variables
 set_pixel_f(canvas, x, y, intensity);
 draw_line_f(canvas, x0, y0, x1, y1, thickness);
+// Function Prototypes
+void set_pixel_f(canvas_t *canvas, float x, float y, float intensity);
+void draw_line_f(canvas_t *canvas, float x0, float y0, float x1, float y1, float thickness);
 
 //Allocate and initialize a canvas
 canvas_t *create_canvas(int width,int height){
