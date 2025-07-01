@@ -16,5 +16,6 @@ float get_pixel(canvas_t *canvas,int x,int y);
 void set_pixel(canvas_t *canvas,int x,int y,float value);
 void set_pixel_f(canvas_t *canvas,float x,float y,float value);
 void draw_line_f(canvas_t *canvas,float x0,float y0,float x1,float y1,float thickness);
+void save_canvas(canvas_t *canvas,const char *filename);
 
 #endif
