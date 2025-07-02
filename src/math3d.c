@@ -1,6 +1,5 @@
 // importing libraries
 #include "math3d.h"
-#include <math.h>
 #include <stdint.h>
 
 vec3_t vec3_from_spherical(float r, float theta, float phi) {
@@ -46,7 +45,7 @@ vec3_t vec3_normalize_fast(vec3_t v) {
     return v;
 }
 
-vec3_t vec3_slerp(vec_t a, vec3_t b, float t) {
+vec3_t vec3_slerp(vec3_t a, vec3_t b, float t) {
     a = vec3_normalize_fast(a);
     b = vec3_normalize_fast(b);
 
@@ -82,6 +81,87 @@ vec3_t vec3_slerp(vec_t a, vec3_t b, float t) {
         .y = s0 * a.y + s1 * b.y,
         .z = s0 * a.z + s1 * b.z
     };
-    return result 
+    return result;
 }
 
+
+
+mat4_t mat4_identity(void) {
+    mat4_t m = {0};
+    m.m[0] = 1.0f;
+    m.m[5] = 1.0f;
+    m.m[10] = 1.0f;
+    m.m[15] = 1.0f;
+    return m;
+}
+
+mat4_t mat4_multiply(mat4_t a, mat4_t b) {
+    mat4_t result = {0};
+    for (int col = 0; col < 4; ++col) {
+        for (int row = 0; row < 4; ++row) {
+           for (int k = 0; k < 4; ++k) {
+                result.m[col * 4 + row] += a.m[k * 4 + row] * b.m[col * 4 + k];
+            }
+        }
+    }
+    return result;
+}
+
+mat4_t mat4_translate(float tx, float ty, float tz) {
+    mat4_t result = mat4_identity();
+    result.m[12] = tx;
+    result.m[13] = ty;
+    result.m[14] = tz;
+    return result;
+}
+
+mat4_t mat4_scale(float sx, float sy, float sz) {
+    mat4_t result = {0};
+    result.m[0] = sx;
+    result.m[5] = sy;
+    result.m[10] = sz;
+    result.m[15] = 1.0f;
+    return result;
+}
+
+mat4_t mat4_rotate_xyz(float rx, float ry, float rz) {
+    mat4_t result = mat4_identity();
+    float cx = cosf(rx);
+    float sx = sinf(rx);
+    float cy = cosf(ry);
+    float sy = sinf(ry);
+    float cz = cosf(rz);
+    float sz = sinf(rz);
+
+    mat4_t rxm = mat4_identity();
+    rxm.m[5] = cx;
+    rxm.m[6] = sx;
+    rxm.m[9] = -sx;
+    rxm.m[10] = cx;
+
+    mat4_t rym = mat4_identity();
+    rym.m[0] = cy;
+    rym.m[2] = -sy;
+    rym.m[8] = sy;
+    rym.m[10] = cy;
+
+    mat4_t rzm = mat4_identity();
+    rzm.m[0] = cz;
+    rzm.m[1] = sz;
+    rzm.m[4] = -sz;
+    rzm.m[5] = cz;
+
+    return mat4_multiply(rzm, mat4_multiply(rym, rxm));
+}
+
+mat4_t mat4_frustum_asymmetric(float left, float right, float bottom, float top, float near, float far) {
+    mat4_t result = {0};
+    result.m[0] = (2.0f * near) / (right - left);
+    result.m[5] = (2.0f * near) / (top - bottom);
+    result.m[8] = (right + left) / (right - left);
+    result.m[9] = (top + bottom) / (top - bottom);
+    result.m[10] = -(far + near) / (far - near);
+    result.m[11] = -1.0f;
+    result.m[14] = -(2.0f * far * near) / (far - near);
+    return result;
+}
