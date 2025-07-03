@@ -172,7 +172,7 @@ mat4_t mat4_frustum_asymmetric(float left, float right, float bottom, float top,
     return result;
 }
 
-#include "math3d.h"
+
 
 vec3_t apply_transform(mat4_t m, vec3_t v) {
     float x = v.x, y = v.y, z = v.z;
@@ -187,3 +187,16 @@ vec3_t apply_transform(mat4_t m, vec3_t v) {
     return out;
 }
 
+vec4_t vec4_from_vec3(vec3_t v, float w) {
+    vec4_t result = {v.x, v.y, v.z, w};
+    return result;
+}
+
+vec4_t mat4_mul_vec4(mat4_t m, vec4_t v) {
+    vec4_t r;
+    r.x = m.m[0] * v.x + m.m[4] * v.y + m.m[8]  * v.z + m.m[12] * v.w;
+    r.y = m.m[1] * v.x + m.m[5] * v.y + m.m[9]  * v.z + m.m[13] * v.w;
+    r.z = m.m[2] * v.x + m.m[6] * v.y + m.m[10] * v.z + m.m[14] * v.w;
+    r.w = m.m[3] * v.x + m.m[7] * v.y + m.m[11] * v.z + m.m[15] * v.w;
+    return r;
+}
