@@ -97,15 +97,21 @@ mat4_t mat4_identity(void) {
 
 mat4_t mat4_multiply(mat4_t a, mat4_t b) {
     mat4_t result = {0};
+    // result = a * b
+    // Matrix elements stored column-major: m[column*4 + row]
     for (int col = 0; col < 4; ++col) {
         for (int row = 0; row < 4; ++row) {
-           for (int k = 0; k < 4; ++k) {
-                result.m[col * 4 + row] += a.m[k * 4 + row] * b.m[col * 4 + k];
+            float sum = 0.0f;
+            for (int k = 0; k < 4; ++k) {
+                // a[row + k*4] * b[k + col*4]
+                sum += a.m[row + k*4] * b.m[k + col*4];
             }
+            result.m[row + col*4] = sum;
         }
     }
     return result;
 }
+
 
 mat4_t mat4_translate(float tx, float ty, float tz) {
     mat4_t result = mat4_identity();
@@ -165,3 +171,19 @@ mat4_t mat4_frustum_asymmetric(float left, float right, float bottom, float top,
     result.m[14] = -(2.0f * far * near) / (far - near);
     return result;
 }
+
+#include "math3d.h"
+
+vec3_t apply_transform(mat4_t m, vec3_t v) {
+    float x = v.x, y = v.y, z = v.z;
+    float w = m.m[3] * x + m.m[7] * y + m.m[11] * z + m.m[15];
+    if (w == 0.0f) w = 1.0f;
+
+    vec3_t out;
+    out.x = (m.m[0] * x + m.m[4] * y + m.m[8]  * z + m.m[12]) / w;
+    out.y = (m.m[1] * x + m.m[5] * y + m.m[9]  * z + m.m[13]) / w;
+    out.z = (m.m[2] * x + m.m[6] * y + m.m[10] * z + m.m[14]) / w;
+
+    return out;
+}
+
