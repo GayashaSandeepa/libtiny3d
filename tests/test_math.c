@@ -4,18 +4,6 @@
 #include "canvas.h"
 #include "math3d.h"
 
-vec3_t apply_transform(mat4_t m, vec3_t v) {
-    float x = v.x, y = v.y, z = v.z;
-    float w = m.m[3] * x + m.m[7] * y + m.m[11] * z + m.m[15];
-    if (w == 0.0f) w = 1.0f;
-
-    vec3_t out;
-    out.x = (m.m[0] * x + m.m[4] * y + m.m[8]  * z + m.m[12]) / w;
-    out.y = (m.m[1] * x + m.m[5] * y + m.m[9]  * z + m.m[13]) / w;
-    out.z = (m.m[2] * x + m.m[6] * y + m.m[10] * z + m.m[14]) / w;
-
-    return out;
-}
 
 int main() {
     const int WIDTH = 512, HEIGHT = 512;
