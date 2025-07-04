@@ -1,0 +1,3 @@
+soccer ball : gcc -Iinclude demo/main.c demo/generate_soccer.c src/renderer.c src/math3d.c src/canvas.c -lm -o soccer_combo
+
+cube : gcc -Iinclude -Isrc tests/test_math.c src/math3d.c src/canvas.c -o test_math.exe -lm
