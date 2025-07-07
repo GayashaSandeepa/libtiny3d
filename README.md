@@ -67,32 +67,3 @@ int main() {
 | `tests/`         | Unit tests (if available)     |
 | `README.md`      | Project documentation         |
 | `LICENSE`        | License information           |
-
-### Contribution Guidelines
-
-- Fork the repository and create your feature branch.
-- Commit your changes with clear messages.
-- Submit a pull request for review.
-- Ensure code follows the project's style and passes tests.
-
-### License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
-### Contact
-
-For issues, suggestions, or contributions, please open an issue on the GitHub repository or contact the maintainer through their GitHub profile.
-
-*Note: If you need more detailed documentation or API references, please check the `docs/` folder or inline code comments in the source files.*
-
-[1] https://github.com/GayashaSandeepa/libtiny3d
-[2] https://pypi.org/project/tiny-3d-engine/
-[3] https://github.com/granberro/tiny3d
-[4] https://github.com/wargio/tiny3D
-[5] https://huggingface.co/spaces/yuanwenyue/FiT3D/commit/55a66b73fe624f757f9140449664fca30deb0b11
-[6] https://github.com/wargio/tiny3D/blob/master/README.md
-[7] https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files
-[8] https://archive.org/details/github.com-nv-tlabs-GET3D_-_2022-09-30_02-16-27
-[9] https://github.com/HailToDodongo/tiny3d/blob/main/build.sh
-[10] https://dev.to/kerthin/18-amazing-github-repositories-that-will-help-you-make-a-beautiful-project-3pgo
-[11] https://gist.github.com/creikey/starred?direction=asc&sort=updated
