@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 
-// Projecting a 3D vertex to 2D screen space using model and projection matrices
+//Projecting a 3D vertex to 2D screen space using model and projection matrices
 static int project_vertex(vec3_t v, mat4_t model, mat4_t proj, int w, int h, float *x_out, float *y_out) {
     // Transform model -> world
     vec4_t vm = vec4_from_vec3(v, 1.0f);
@@ -21,7 +21,7 @@ static int project_vertex(vec3_t v, mat4_t model, mat4_t proj, int w, int h, flo
     return 1;
 }
 
-// Drawing line with anti-aliasing using canvas function draw_line_f
+//Drawing line with anti-aliasing using canvas function draw_line_f
 extern void draw_line_f(canvas_t *c, float x0, float y0, float x1, float y1, float thickness);
 
 void render_wireframe_soccer(canvas_t *canvas, vec3_t *vertices, int vertex_count, int edges[][2], int edge_count, mat4_t model, mat4_t proj) {
@@ -44,7 +44,7 @@ void render_wireframe_soccer(canvas_t *canvas, vec3_t *vertices, int vertex_coun
         int i0 = edges[i][0];
         int i1 = edges[i][1];
 
-        // removing invalid inputs
+        //removing invalid inputs
         if (i0 < 0 || i0 >= vertex_count || i1 < 0 || i1 >= vertex_count) {
             fprintf(stderr, "Invalid edge index: edge[%d] = {%d, %d}\n", i, i0, i1);
             continue;
@@ -77,7 +77,7 @@ static void draw_line_f_intensity(canvas_t *c, float x0, float y0, float x1, flo
     }
 }
 
-// Final lighting-aware wireframe renderer
+//Final lighting-aware wireframe renderer
 void render_wireframe_lighting(canvas_t *canvas, vec3_t *vertices, int vertex_count,
                       int edges[][2], int edge_count, mat4_t model,
                       mat4_t proj, vec3_t light_dir) {
@@ -92,7 +92,7 @@ void render_wireframe_lighting(canvas_t *canvas, vec3_t *vertices, int vertex_co
         vec3_t w0 = apply_transform(model, vertices[i0]);
         vec3_t w1 = apply_transform(model, vertices[i1]);
 
-        // Edge center
+        //Edge center
         vec3_t mid = {
             0.5f * (w0.x + w1.x),
             0.5f * (w0.y + w1.y),
@@ -102,7 +102,7 @@ void render_wireframe_lighting(canvas_t *canvas, vec3_t *vertices, int vertex_co
         vec3_t to_light = vec3_normalize_fast(light_dir);
         vec3_t to_mid = vec3_normalize_fast(mid);
 
-        // Use negative dot to simulate light from side
+        //Use negative dot to simulate light from side
         float intensity = vec3_dot(to_light, to_mid);
         if (intensity < 0.0f) intensity = -intensity;
 
