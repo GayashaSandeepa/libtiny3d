@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 
-// Normalize a vec3 to length 1 (if length != 0)
+// Normalizing a vec3 to length 1 (if length != 0)
 static vec3_t vec3_normalize(vec3_t v) {
     float len = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
     if (len > 0.00001f) {
