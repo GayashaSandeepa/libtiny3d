@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 
-// Project a 3D vertex to 2D screen space using model and projection matrices
+// Projecting a 3D vertex to 2D screen space using model and projection matrices
 static int project_vertex(vec3_t v, mat4_t model, mat4_t proj, int w, int h, float *x_out, float *y_out) {
     // Transform model -> world
     vec4_t vm = vec4_from_vec3(v, 1.0f);
@@ -16,14 +16,12 @@ static int project_vertex(vec3_t v, mat4_t model, mat4_t proj, int w, int h, flo
     float nx = vm.x / vm.w;
     float ny = vm.y / vm.w;
 
-    // Convert NDC [-1..1] to screen coordinates
     *x_out = (nx * 0.5f + 0.5f) * (float)(w - 1);
     *y_out = (1.0f - (ny * 0.5f + 0.5f)) * (float)(h - 1);
     return 1;
 }
 
-// Draw line with anti-aliasing using canvas function draw_line_f or your own
-// For simplicity, let's just call canvas draw_line_f
+// Drawing line with anti-aliasing using canvas function draw_line_f
 extern void draw_line_f(canvas_t *c, float x0, float y0, float x1, float y1, float thickness);
 
 void render_wireframe_soccer(canvas_t *canvas, vec3_t *vertices, int vertex_count, int edges[][2], int edge_count, mat4_t model, mat4_t proj) {
@@ -46,7 +44,7 @@ void render_wireframe_soccer(canvas_t *canvas, vec3_t *vertices, int vertex_coun
         int i0 = edges[i][0];
         int i1 = edges[i][1];
 
-        // SAFETY CHECK
+        // removing invalid inputs
         if (i0 < 0 || i0 >= vertex_count || i1 < 0 || i1 >= vertex_count) {
             fprintf(stderr, "Invalid edge index: edge[%d] = {%d, %d}\n", i, i0, i1);
             continue;
