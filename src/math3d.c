@@ -200,3 +200,27 @@ vec4_t mat4_mul_vec4(mat4_t m, vec4_t v) {
     r.w = m.m[3] * v.x + m.m[7] * v.y + m.m[11] * v.z + m.m[15] * v.w;
     return r;
 }
+
+float vec3_dot(vec3_t a, vec3_t b) {
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+
+vec3_t vec3_cross(vec3_t a, vec3_t b) {
+    return (vec3_t){
+        a.y * b.z - a.z * b.y,
+        a.z * b.x - a.x * b.z,
+        a.x * b.y - a.y * b.x
+    };
+}
+
+vec3_t vec3_sub(vec3_t a, vec3_t b) {
+    vec3_t result;
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
+    result.z = a.z - b.z;
+    return result;
+}
+
+
+
