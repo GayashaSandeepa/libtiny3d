@@ -1,32 +1,32 @@
-// importing libraries
+//importing libraries
 #include "math3d.h"
 #include <stdint.h>
 
-vec3_t vec3_from_spherical(float r, float theta, float phi) {
+vec3_t vec3_from_spherical(float r,float theta,float phi){
     vec3_t v;
-    v.x = r * sinf(phi) * cosf(theta);
-    v.y = r * sinf(phi) * sinf(theta);
-    v.z = r * cosf(phi);
+    v.x=r*sinf(phi)*cosf(theta);
+    v.y=r*sinf(phi)*sinf(theta);
+    v.z=r*cosf(phi);
     return v;
 }
 
-void vec3_to_spherical(vec3_t v, float *r, float *theta, float *phi) {
-    float length = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-    if (r) {
-        *r = length;
+void vec3_to_spherical(vec3_t v,float *r,float *theta,float *phi){
+    float length=sqrtf(v.x*v.x + v.y*v.y +v.z*v.z);
+    if (r){
+        *r=length;
     }
 
-    if (theta) {
-        *theta = atan2f(v.y, v.x);
+    if (theta){
+        *theta=atan2f(v.y, v.x);
     }
 
-    if (phi) {
-        *phi = (length == 0.0f) ? 0.0f : acosf(v.z / length);
+    if (phi){
+        *phi=(length==0.0f) ? 0.0f : acosf(v.z / length);
     }
 }
 
 vec3_t vec3_normalize_fast(vec3_t v) {
-    float squared_length = (v.x * v.x + v.y * v.y + v.z * v.z);
+    float squared_length=(v.x * v.x + v.y * v.y + v.z * v.z);
     int32_t i;
     float x2, y;
     const float threehalfs = 1.5f;
@@ -97,8 +97,8 @@ mat4_t mat4_identity(void) {
 
 mat4_t mat4_multiply(mat4_t a, mat4_t b) {
     mat4_t result = {0};
-    // result = a * b
-    // Matrix elements stored column-major: m[column*4 + row]
+    //result = a * b
+    //Matrix elements stored column-major: m[column*4 + row]
     for (int col = 0; col < 4; ++col) {
         for (int row = 0; row < 4; ++row) {
             float sum = 0.0f;
