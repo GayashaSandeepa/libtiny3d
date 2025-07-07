@@ -40,4 +40,10 @@ vec3_t apply_transform(mat4_t m, vec3_t v);
 vec4_t vec4_from_vec3(vec3_t v, float w);
 vec4_t mat4_mul_vec4(mat4_t m, vec4_t v);
 
+float vec3_dot(vec3_t a, vec3_t b);
+
+vec3_t vec3_cross(vec3_t a, vec3_t b);
+
+vec3_t vec3_sub(vec3_t a, vec3_t b);
+
 #endif
